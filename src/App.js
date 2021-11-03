@@ -8,6 +8,7 @@ import {
   Link
 } from "react-router-dom";
 import Home from './Pages/Home/Home/Home';
+import Appointment from './Pages/Appointment/Appointment/Appointment';
 
 
 function App() {
@@ -15,14 +16,11 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/about">
-            {/* <About /> */}
-          </Route>
-          <Route path="/users">
-            {/* <Users /> */}
-          </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
+          </Route>
+          <Route exact path='/appointment'>
+            <Appointment></Appointment>
           </Route>
         </Switch>
       </Router>
