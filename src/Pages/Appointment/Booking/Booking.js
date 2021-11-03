@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 import { fontWeight } from '@mui/system';
 import BookingModal from '../BookingModal/BookingModal';
 
-const Booking = ({ booking }) => {
+const Booking = ({ booking, date }) => {
     const { name, time, space } = booking;
 
     const [openBooking, setBookingOpen] = React.useState(false);
@@ -28,7 +28,7 @@ const Booking = ({ booking }) => {
                     <Button onClick={handleBookingOpen} sx={{ my: 1 }} variant="contained">Booking Now</Button>
                 </Paper>
             </Grid>
-            <BookingModal booking={booking} handleBookingClose={handleBookingClose} openBooking={openBooking}></BookingModal>
+            <BookingModal date={date} booking={booking} handleBookingClose={handleBookingClose} openBooking={openBooking}></BookingModal>
         </>
     );
 };

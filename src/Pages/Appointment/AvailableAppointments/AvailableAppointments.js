@@ -33,7 +33,7 @@ const AvailableAppointments = ({ date }) => {
             <Typography variant='h5' sx={{ color: 'info.main', fontWeight: 600, my: 2 }}>Available appointments {date?.toDateString()}</Typography>
             <Grid container spacing={2}>
                 {
-                    bookings.map(booking => <Booking key={booking.id} booking={booking}></Booking>)
+                    bookings.map(booking => <Booking key={booking.id} booking={booking} date={date}></Booking>)
                 }
             </Grid>
         </Container>
