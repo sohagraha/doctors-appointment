@@ -1,10 +1,10 @@
 import { Button, Container, Grid, TextField, Typography } from '@mui/material';
-import { set } from 'date-fns/esm';
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import login from '../../images/login.png'
+import { NavLink } from 'react-router-dom'; import login from '../../../images/login.png'
 
-const Login = () => {
+
+
+const Register = () => {
     const [loginData, setLoginData] = useState({});
 
     const handleOnChange = e => {
@@ -15,14 +15,18 @@ const Login = () => {
         setLoginData(newLoginData)
     }
     const handleLogin = e => {
-        alert('hello')
+        if (loginData.password !== loginData.password2) {
+            alert('wrong');
+            e.preventDefault();
+            return;
+        }
         e.preventDefault();
     }
     return (
         <Container>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
-                    <Typography variant="body1" gutterBottom>Login</Typography>
+                    <Typography variant="body1" gutterBottom>Register</Typography>
                     <form onSubmit={handleLogin}>
                         <TextField sx={{ width: '75%', m: 1 }}
                             name="email"
@@ -32,8 +36,12 @@ const Login = () => {
                             name="password"
                             onChange={handleOnChange} id="standard-basic" label="Password" variant="standard" type="password" />
                         <br />
+                        <TextField sx={{ width: '75%', m: 1 }}
+                            name="password2"
+                            onChange={handleOnChange} id="standard-basic" label="Repeat Password" variant="standard" type="password" />
+                        <br />
                         <NavLink
-                            style={{ textDecoration: 'none' }} to="/register"><Button variant="text">New user please register</Button></NavLink>
+                            style={{ textDecoration: 'none' }} to="/login"><Button variant="text">Already have an account?</Button></NavLink>
                         <br />
                         <Button variant='contained' type='submit'>log in</Button>
                     </form>
@@ -46,4 +54,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
