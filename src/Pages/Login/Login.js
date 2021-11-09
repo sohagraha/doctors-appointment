@@ -7,7 +7,7 @@ import useAuth from '../../hooks/useAuth'
 
 const Login = () => {
     const [loginData, setLoginData] = useState({});
-    const { user, loginUser, isLoading, authError } = useAuth();
+    const { user, loginUser, signInWithGoogle, isLoading, authError } = useAuth();
 
     const location = useLocation()
     const history = useHistory()
@@ -23,6 +23,11 @@ const Login = () => {
         loginUser(loginData.email, loginData.password, location, history)
         e.preventDefault();
     }
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle(location, history)
+    }
+
     return (
         <Container>
             <Grid container spacing={2}>
@@ -31,16 +36,18 @@ const Login = () => {
                     <form onSubmit={handleLogin}>
                         <TextField sx={{ width: '75%', m: 1 }}
                             name="email"
-                            onChange={handleOnChange} id="standard-basic" label="Mail" variant="standard" />
+                            onBlur={handleOnChange} id="standard-basic" label="Mail" variant="standard" />
                         <br />
                         <TextField sx={{ width: '75%', m: 1 }}
                             name="password"
-                            onChange={handleOnChange} id="standard-basic" label="Password" variant="standard" type="password" />
+                            onBlur={handleOnChange} id="standard-basic" label="Password" variant="standard" type="password" />
                         <br />
                         <NavLink
                             style={{ textDecoration: 'none' }} to="/register"><Button variant="text">New user please register</Button></NavLink>
                         <br />
                         <Button variant='contained' type='submit'>log in</Button>
+                        <p>----------------------------</p>
+                        <Button onClick={handleGoogleSignIn} variant='contained'>Google Sign In</Button>
                     </form>
                     {
                         isLoading && <CircularProgress />
