@@ -27,6 +27,8 @@ import {
 } from "react-router-dom";
 import MakeAdmin from '../MakeAdmin/MakeAdmin';
 import AddDoctor from '../AddDoctor/AddDoctor';
+import useAuth from '../../../hooks/useAuth';
+import AdminRoute from '../../Login/AdminRoute/AdminRoute';
 
 
 const drawerWidth = 240;
@@ -37,6 +39,7 @@ function Dashboard(props) {
     // const [date, setDate] = React.useState(new Date())
 
     let { path, url } = useRouteMatch();
+    const { admin } = useAuth()
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -48,8 +51,12 @@ function Dashboard(props) {
             <Divider />
             <Link to='/appointment'><Button variant='contained'>Appointment</Button></Link>
             <Link to={`${url}`}><Button variant='contained'>DashBoard</Button></Link>
-            <Link to={`${url}/makeadmin`}><Button variant='contained'>Make Admin</Button></Link>
-            <Link to={`${url}/adddoctor`}><Button variant='contained'>Add Doctor</Button></Link>
+            {
+                admin && <Box>
+                    <Link to={`${url}/makeadmin`}><Button variant='contained'>Make Admin</Button></Link>
+                    <Link to={`${url}/adddoctor`}><Button variant='contained'>Add Doctor</Button></Link>
+                </Box>
+            }
             {/* <Link to={`${url}/rendering`}>Rendering with React</Link> */}
             <List>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
@@ -145,12 +152,12 @@ function Dashboard(props) {
                     <Route exact path={`${path}`}>
                         <DashboardHome></DashboardHome>
                     </Route>
-                    <Route path={`${path}/makeadmin`}>
+                    <AdminRoute path={`${path}/makeadmin`}>
                         <MakeAdmin></MakeAdmin>
-                    </Route>
-                    <Route path={`${path}/adddoctor`}>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/adddoctor`}>
                         <AddDoctor></AddDoctor>
-                    </Route>
+                    </AdminRoute>
                 </Switch>
 
             </Box>
