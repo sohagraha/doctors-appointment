@@ -8,9 +8,7 @@ import login from '../../../images/login.png'
 
 const Register = () => {
     const [loginData, setLoginData] = useState({});
-
     const { user, registerUser, isLoading, authError } = useAuth();
-
     const history = useHistory()
 
     const handleOnBlur = e => {

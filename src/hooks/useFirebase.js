@@ -26,7 +26,7 @@ const useFirebase = () => {
                 const newUser = { email, displayName: name }
                 //send name to firebase after creation.
                 setUser(newUser);
-
+                saveUser(email, name, 'POST');
                 updateProfile(auth.currentUser, {
                     displayName: name
                 }).then(() => {
@@ -37,10 +37,10 @@ const useFirebase = () => {
                     // ...
                 });
 
-                history.replace('/')
+                const destination = '/';
+                history.replace(destination)
             })
             .catch((error) => {
-                const errorCode = error.code;
                 const errorMessage = error.message;
                 setAuthError(errorMessage);
             })
@@ -52,12 +52,10 @@ const useFirebase = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 setAuthError('')
-                const user = userCredential.user;
                 const destination = location?.state?.from || '/';
                 history.replace(destination)
             })
             .catch((error) => {
-                const errorCode = error.code;
                 const errorMessage = error.message;
                 setAuthError(errorMessage);
             })
@@ -69,28 +67,21 @@ const useFirebase = () => {
         setIsLoading(true);
         signInWithPopup(auth, googleProvider)
             .then((result) => {
-                setAuthError('')
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-                // The signed-in user info.
                 const user = result.user;
-                // ...
+                saveUser(user.email, user.displayName, 'PUT')
+                setAuthError('')
+
                 const destination = location?.state?.from || '/';
                 history.replace(destination)
+
             }).catch((error) => {
-                // Handle Errors here.
-                const errorCode = error.code;
                 const errorMessage = error.message;
                 setAuthError(errorMessage);
-                // The email of the user's account used.
-                const email = error.email;
-                // The AuthCredential type that was used.
-                const credential = GoogleAuthProvider.credentialFromError(error);
-                // ...
             })
             .finally(() => setIsLoading(false));
     }
+
+
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -109,6 +100,19 @@ const useFirebase = () => {
         }).catch((error) => {
         })
             .finally(() => setIsLoading(false));
+    }
+
+    const saveUser = (email, displayName, method) => {
+        const user = { email, displayName }
+        fetch('http://localhost:5000/users', {
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then()
     }
 
     return {

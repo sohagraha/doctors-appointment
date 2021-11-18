@@ -44,7 +44,7 @@ const Appointments = ({ date }) => {
                                 </TableCell>
                                 <TableCell align="center">{row.time}</TableCell>
                                 <TableCell align="center">{row.serviceName}</TableCell>
-                                <TableCell align="right">{row.patientName}</TableCell>
+                                <TableCell align="right">{row.patientNames}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
