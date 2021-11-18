@@ -18,7 +18,6 @@ const Register = () => {
         const value = e.target.value;
         const newLoginData = { ...loginData }
         newLoginData[field] = value;
-
         setLoginData(newLoginData)
     }
     const handleLogin = e => {
