@@ -9,19 +9,22 @@ const bookings = [
         id: 1,
         name: 'name',
         time: '11.00-08.00',
-        space: 5
+        space: 5,
+        price: 125
     },
     {
         id: 2,
         name: 'name',
         time: '11.00-08.00',
-        space: 5
+        space: 5,
+        price: 125
     },
     {
         id: 3,
         name: 'names',
         time: '11.00-08.00',
-        space: 5
+        space: 5,
+        price: 125
     }
 ]
 

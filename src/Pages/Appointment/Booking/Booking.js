@@ -6,7 +6,7 @@ import { fontWeight } from '@mui/system';
 import BookingModal from '../BookingModal/BookingModal';
 
 const Booking = ({ booking, date, setBookingSuccess }) => {
-    const { name, time, space } = booking;
+    const { name, time, space, price } = booking;
 
     const [openBooking, setBookingOpen] = React.useState(false);
     const handleBookingOpen = () => setBookingOpen(true);
@@ -21,6 +21,9 @@ const Booking = ({ booking, date, setBookingSuccess }) => {
                     </Typography>
                     <Typography variant='h6' gutterBottom component='div'>
                         {time}
+                    </Typography>
+                    <Typography variant='h6' gutterBottom component='div'>
+                        price : $ {price}
                     </Typography>
                     <Typography variant='caption' gutterBottom component='div'>
                         {space} Spaces Available
